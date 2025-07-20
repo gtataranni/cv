@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Giovanni Tataranni</title>
+    <style>
+        :root {
+            --color-opensystems: #83a840;
+            --color-ubs: #E63946;
+            --color-ge: #457B9D;
+            --color-education: #F77F00;
+            --color-primary: #2E86AB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 15px;
+            max-width: 250mm;
+            margin: 0 auto;
+            background-color: white;
+            color: #333;
+            font-size: 10pt;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 70% 1fr;
+            gap: 20px;
+        }
+
+        .left-column {
+            padding-right: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .header {
+            margin-bottom: 5px;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 5px;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .header-main {
+            text-align: left;
+        }
+
+        .name {
+            font-size: 24pt;
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        .title {
+            font-size: 12pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 9pt;
+            text-align: right;
+            padding-top: 5px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .section {
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: var(--color-primary);
+            border-bottom: 1px solid var(--color-primary);
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+        }
+
+        .section-title.timeline {
+            margin-left: 50px;
+            border-bottom: transparent;
+            margin-top: -10px;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            padding-left: 100px;
+            margin-top: 35px;
+            margin-bottom: 30px;
+            padding-top: 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 60px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--color-primary), #A8DADC);
+            border-radius: 2px;
+            margin-bottom: -25px;
+        }
+
+        /* Future timeline - dashed line extending upward */
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            height: 32px;
+            margin-top: 35;
+            border-left: 3.1px dashed #2E86AB;
+        }
+
+        .branch-group {
+            position: relative;
+            margin-bottom: 51px;
+            padding-top: 20px;
+            margin-top: -29px;
+        }
+
+        /* Timeline dot (in or out) */
+        .timeline-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background: var(--color-primary);
+            z-index: 3;
+            left: -45px;
+        }
+
+        .timeline-dot.in {
+            top: 10px;
+        }
+
+        .timeline-dot.out {
+            bottom: -28px;
+        }
+
+
+        /* Branch curve base */
+        .branch-curve {
+            position: absolute;
+            left: -50px;
+            border: 3px solid;
+            border-color: transparent;
+        }
+
+        .branch-curve.in {
+            top: 25px;
+            width: 75px;
+            height: 75px;
+            border-top-color: inherit;
+            border-radius: 0 20px 0 0;
+            transform: rotate(15deg);
+            border-bottom-color: transparent;
+        }
+
+        .branch-curve.out {
+            bottom: -15px;
+            width: 74px;
+            height: 70px;
+            border-bottom-color: inherit;
+            border-radius: 0 0 15px 0;
+            transform: rotate(-15deg);
+        }
+
+        .branch-group.open-systems .branch-curve.in {
+            border-top-color: var(--color-opensystems);
+        }
+
+        .branch-group.ubs .branch-curve.in {
+            border-top-color: var(--color-ubs);
+        }
+
+        .branch-group.ge .branch-curve.in {
+            border-top-color: var(--color-ge);
+        }
+
+        .branch-group.education .branch-curve.in {
+            border-top-color: var(--color-education);
+        }
+
+        .company-header {
+            font-weight: bold;
+            font-size: 11pt;
+            position: relative;
+            z-index: 2;
+            padding-left: 20px;
+        }
+
+        .company-header.current {
+            border-left: 3px solid;
+        }
+
+        .company-header.current.open-systems {
+            border-left-color: var(--color-opensystems);
+        }
+
+        .company-header.current.ubs {
+            border-left-color: var(--color-ubs);
+        }
+
+        .company-header.current.ge {
+            border-left-color: var(--color-ge);
+        }
+
+        .company-header.current.education {
+            border-left-color: var(--color-education);
+        }
+
+        /* Branch line */
+        .positions-container {
+            position: relative;
+            margin-left: 30px;
+            /*! padding-left: 20px; */
+            margin-bottom: 15px;
+        }
+
+        .position-entry {
+            border-left: 3px solid;
+            padding-left: 20px;
+            padding-bottom: 2px;
+            position: relative;
+        }
+
+        .position-entry.open-systems {
+            border-left-color: var(--color-opensystems);
+        }
+
+        .position-entry.ubs {
+            border-left-color: var(--color-ubs);
+        }
+
+        .position-entry.ge {
+            border-left-color: var(--color-ge);
+        }
+
+        .position-entry.education {
+            border-left-color: var(--color-education);
+        }
+
+        /* future dash */
+        .company-header.current::after {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: -65px;
+            width: 3px;
+            height: 32px;
+            margin-top: 40px;
+            border-left-width: 3px;
+            border-left-style: dashed;
+            border-left-color: inherit;
+        }
+
+
+        .branch-group.open-systems .branch-curve.out {
+            border-bottom-color: #83a840;
+        }
+
+        .branch-group.ubs .branch-curve.out {
+            border-bottom-color: #E63946;
+        }
+
+        .branch-group.ge .branch-curve.out {
+            border-bottom-color: #457B9D;
+        }
+
+        .branch-group.education .branch-curve.out {
+            border-bottom-color: #F77F00;
+        }
+
+
+
+        .position-dot {
+            position: absolute;
+            left: -7.5px;
+            top: 0px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid white;
+            z-index: 2;
+        }
+
+        .position-dot.open-systems {
+            background-color: var(--color-opensystems);
+        }
+
+        .position-dot.ubs {
+            background-color: var(--color-ubs);
+        }
+
+        .position-dot.ge {
+            background-color: var(--color-ge);
+        }
+
+        .position-dot.education {
+            background-color: var(--color-education);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .entry-title {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .entry-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .entry-location {
+            color: #666;
+            font-size: 9pt;
+            margin-bottom: 5px;
+        }
+
+        .entry-date {
+            font-size: 8pt;
+            color: #666;
+            white-space: nowrap;
+            position: absolute;
+            left: -60px;
+            top: -2px;
+            width: 60px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            font-size: 8pt;
+            color: #666;
+            white-space: nowrap;
+            position: absolute;
+            left: -100px;
+            top: 7px;
+            width: 60px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .entry-description {
+            text-align: justify;
+            font-size: 9.5pt;
+        }
+
+        .achievements {
+            margin: 8px 0 4px 0;
+        }
+
+        .achievement {
+            margin: 4px 0;
+            padding: 4px 8px;
+            border-left: 3px solid;
+            background-color: #f8f9fa;
+            font-size: 9.5pt;
+            position: relative;
+        }
+
+        .achievement.open-systems {
+            border-left-color: var(--color-opensystems);
+        }
+
+        .achievement.ubs {
+            border-left-color: var(--color-ubs);
+        }
+
+        .achievement.ge {
+            border-left-color: var(--color-ge);
+        }
+
+        .achievement.education {
+            border-left-color: var(--color-education);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 10px;
+            row-gap: 4px;
+            margin-bottom: 8px;
+            align-items: baseline;
+            font-size: 9pt;
+        }
+
+        .skill-level {
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        .skill-list ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .skill-list li {
+            margin-bottom: 2px;
+            line-height: 1.3;
+            color: #333;
+        }
+
+        .about-text {
+            text-align: justify;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: right;
+            font-style: italic;
+            color: #666;
+            font-size: 9pt;
+            margin-top: 5px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+ 
+        @media screen and (max-width: 1024px) {
+            body {
+                /* Remove any existing padding/margins */
+                padding: 10mm;
+                /* Force minimum width to prevent layout breaking */
+                min-width: 210mm;
+                /* Center the content if screen allows */
+                margin: 0 auto;
+                /* Add horizontal scrolling when needed */
+                overflow-x: auto;
+                /* Ensure the body takes at least full viewport height */
+                min-height: 100vh;
+            }
+
+            /* Add a subtle hint that users can scroll horizontally */
+            .main-container {
+                position: relative;
+            }
+        }
+ 
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 10mm;
+                max-width: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                forced-color-adjust: none;
+                zoom: 0.67;
+                transform-origin: top left;
+            }
+            .main-container {
+                gap: 15px;
+            }
+            .achievement {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                forced-color-adjust: none;
+                background-color: #f8f9fa !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                forced-color-adjust: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-grid">
+            <div class="header-main">
+                <div class="name">Giovanni Tataranni</div>
+                <div class="title">Software Engineer</div>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">🔗 <a href="http://github.com/gtataranni" target="_blank"
+                        rel="noopener noreferrer">GitHub</a></div>
+                <div class="contact-item">🔗 <a href="http://linkedin.com/in/gtataranni/en" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a></div>
+                <div class="contact-item">✉ <a href="mailto:g.tataranni@gmail.com">g.tataranni@gmail.com</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="about-text">
+            Software Engineer with 8+ years of experience in secure network solutions, performance optimization, and
+            enterprise security. <br>Proven track record in designing and optimizing secure network platforms, leading
+            cross-functional teams, and driving innovation in SD-WAN and cybersecurity domains. Strong advocate for
+            collaborative development practices and continuous improvement.
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="left-column">
+
+            <div class="section">
+                <div class="timeline-container">
+                    <div class="section-title timeline">Experience</div>
+                    <div class="timeline-line"></div>
+
+                    <div class="branch-group open-systems">
+                        <div class="positions-container current open-systems">
+                            <div class="company-header open-systems current">Open Systems - Zurich, Switzerland</div>
+                            <div class="position-entry open-systems">
+                                <div class="position-dot open-systems"></div>
+                                <div class="entry-date">Jun 2025</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Staff Engineer</div>
+                                        <div class="entry-description">
+                                            Leading the design and optimization of secure network solutions, platform
+                                            architecture, and technology stack modernization. Collaborating with
+                                            cross-functional teams to drive innovation and ensure seamless integration
+                                            of all Open Systems services.
+                                            <div class="achievements">
+                                                <div class="achievement open-systems">
+                                                    Contributed to the design of new security policy framework, drawing
+                                                    the path for simpler architecture and usability.
+                                                </div>
+                                                <div class="achievement open-systems">
+                                                    Raised awareness of current suboptimal developer experience,
+                                                    allowing for targeted improvements and increased productivity.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-entry open-systems">
+                                <div class="position-dot open-systems"></div>
+                                <div class="entry-date">Mar 2024</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Senior Security Engineer</div>
+                                        <div class="entry-description">
+                                            Extended and modernized Open Systems SASE (Secure Access Service Edge)
+                                            platform,
+                                            focusing on scalability and security enhancements.
+                                            <div class="achievements">
+                                                <div class="achievement open-systems">
+                                                    Coordinated large and sensitive network redesign deployment to
+                                                    largest customer.
+                                                </div>
+                                                <div class="achievement open-systems">
+                                                    Led the implementation of a new tunneling feature to win major
+                                                    client and enhance competitive posture.
+                                                </div>
+                                                <div class="achievement open-systems">
+                                                    Automated patch testing procedures, reducing engineers chore time by
+                                                    80%.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-entry open-systems">
+                                <div class="position-dot open-systems"></div>
+                                <div class="entry-date">Sep 2019</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Security Engineer</div>
+                                        <div class="entry-description">
+                                            Developed and maintained SD-WAN and Enterprise Network Security solutions
+                                            using Go, Perl, and bash on Linux. Balanced 80% development with 20%
+                                            operations responsibilities in a dynamic engineering environment.
+                                            <div class="achievements">
+                                                <div class="achievement open-systems">
+                                                    Designed the migration strategy of legacy routing suite, allowing
+                                                    gradual transition to new technologies.
+                                                </div>
+                                                <div class="achievement open-systems">
+                                                    Standardised and codified the manual test procedures, improving
+                                                    testing efficiency and doubling up coverage.
+                                                </div>
+                                                <div class="achievement open-systems">
+                                                    Intense refactoring of legacy codebase, resulting in a 25% reduction
+                                                    in technical debt.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch-curve out"></div>
+                        <div class="timeline-dot out"></div>
+
+                    </div>
+
+                    <div class="branch-group ubs">
+                        <div class="timeline-dot in"></div>
+                        <div class="timeline-date">Aug 2019</div>
+                        <div class="branch-curve in"></div>
+                        <div class="positions-container ubs">
+                            <div class="company-header ubs">UBS - Zurich, Switzerland</div>
+                            <div class="position-entry ubs">
+                                <div class="position-dot ubs"></div>
+                                <div class="entry-date">Jul 2017</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Software Developer &amp; Red Team Specialist</div>
+                                        <div class="entry-description">
+                                            Developed Java applications for distributed foreign exchange systems while
+                                            participating in UBS Graduate Talent Program.
+                                            <div class="achievements">
+                                                <div class="achievement ubs">
+                                                    Contributed to adoption of Software Best Practices in the
+                                                    team, reducing onboarding time for new developers by 50%.
+                                                </div>
+                                                <div class="achievement ubs">
+                                                    Completed 6-month rotation in Red Team Cyber Assurance,
+                                                    conducting full-spectrum security assessments, from
+                                                    reconnaissance to exfiltration, and delivering reports to senior
+                                                    management.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch-curve out"></div>
+                        <div class="timeline-dot out"></div>
+
+                    </div>
+
+                    <div class="branch-group ge">
+                        <div class="timeline-dot in"></div>
+                        <div class="timeline-date">Jan 2017</div>
+
+                        <div class="branch-curve in"></div>
+                        <div class="positions-container ge">
+                            <div class="company-header ge">GE Healthcare - Paris, France</div>
+                            <div class="position-entry ge">
+                                <div class="position-dot ge"></div>
+                                <div class="entry-date">Jul 2016</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Performance Optimization Engineer (Intern)</div>
+                                        <div class="entry-description">
+                                            Master Thesis Project in medical imaging optimization.
+                                            <div class="achievements">
+                                                <div class="achievement ge">
+                                                    Achieved 78% runtime performance improvement in C++ image
+                                                    processing algorithms for Contrast Enhanced Spectral Mammography
+                                                    through parallelization and algorithm optimization, by building
+                                                    a Poor Man's
+                                                    Profiler using
+                                                    perf and Flame Graphs.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch-curve out"></div>
+                        <div class="timeline-dot out"></div>
+
+                    </div>
+
+                    <div class="section-title timeline">Education</div>
+
+                    <!-- <div class="timeline-line"></div> -->
+
+                    <div class="branch-group education">
+                        <div class="timeline-dot in"></div>
+                        <div class="timeline-date">Apr 2017</div>
+                        <div class="branch-curve in"></div>
+
+                        <div class="positions-container education">
+                            <div class="company-header education">Politecnico di Torino &amp; Eurecom</div>
+                            <div class="position-entry education">
+                                <div class="position-dot education"></div>
+                                <div class="entry-date">2015</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Master's in Computer Engineering</div>
+                                        <div class="entry-subtitle">Double Degree Program - Grade: 108/110</div>
+                                        <div class="entry-location">Politecnico di Torino, Italy &amp; Eurecom,
+                                            France
+                                        </div>
+                                        <div class="entry-description">
+                                            Specialization in Communications and Computer Security through Erasmus+
+                                            Double
+                                            Degree program with Télécom ParisTech partnership.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-entry education">
+                                <div class="position-dot education"></div>
+                                <div class="entry-date">2011</div>
+                                <div class="entry-header">
+                                    <div>
+                                        <div class="entry-title">Bachelor's in Computer Engineering</div>
+                                        <div class="entry-subtitle">Grade: 108/110</div>
+                                        <div class="entry-location">Politecnico di Torino, Italy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch-curve out"></div>
+                        <div class="timeline-dot out"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="section">
+                <div class="section-title">Core Competencies</div>
+                <div class="skills-grid">
+                    <div class="skill-level">Architecture</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>Secure Application Design</li>
+                            <li>SASE/SD-WAN Platforms</li>
+                            <li>API Design</li>
+                        </ul>
+                    </div>
+                    <div class="skill-level">Development</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>Go</li>
+                            <li>Perl</li>
+                            <li>Python</li>
+                            <li>C/C++</li>
+                            <li>Linux Networking</li>
+                            <li>Performance Optimization</li>
+                        </ul>
+                    </div>
+                    <div class="skill-level">Security</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>Red Team Operations</li>
+                            <li>Cybersecurity Assessment</li>
+                            <li>Network Security</li>
+                        </ul>
+                    </div>
+                    <div class="skill-level">Leadership</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>Cross-functional Collaboration</li>
+                            <li>Technical Innovation</li>
+                            <li>Team Mentoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Languages</div>
+                <div class="skills-grid">
+                    <div class="skill-level">Native</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>Italian</li>
+                        </ul>
+                    </div>
+                    <div class="skill-level">Professional</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>English</li>
+                        </ul>
+                    </div>
+                    <div class="skill-level">Conversational</div>
+                    <div class="skill-list">
+                        <ul>
+                            <li>German (B1 Certified)</li>
+                            <li>French</li>
+                            <li>Spanish</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Last updated July 2025 · <a href="https://gtataranni.github.io/cv/">https://gtataranni.github.io/cv/</a>
+        <span class="print-button"> · <a href="#" onclick="window.print();return false;">Print or save to PDF</a>
+        </span>
+    </div>
+
+    <style>
+        .print-button {
+            margin-left: 10px;
+        }
+        .print-button a {
+            color: #666;
+            text-decoration: none;
+        }
+        .print-button a:hover {
+            text-decoration: underline;
+        }
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+
+    <deepl-input-controller translate="no"></deepl-input-controller>
+</body>
+
+</html>

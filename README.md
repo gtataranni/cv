@@ -1,0 +1,1 @@
+See my CV on https://gtataranni.github.io/cv or [download the PDF](./CV.pdf).
